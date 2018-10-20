@@ -65,7 +65,11 @@ class AdvertDetailsActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        TODO("Инициализировать ViewModel")
+        val advertisementId = getAdvertisementId()
+        val viewModelFactory = AdvertDetailsViewModelFactory(advertisementId)
+        advertDetailsViewModel = ViewModelProviders
+                .of(this, viewModelFactory)
+                .get(AdvertDetailsViewModel::class.java)
     }
 
     private fun observeLiveData() {
