@@ -31,7 +31,7 @@ class AdvertListActivity : AppCompatActivity() {
                 .of(this)
                 .get(AdvertListViewModel::class.java)
         advertListViewModel.getAdvertisements().observe(this, Observer { advertisements ->
-            TODO("Обновляем UI")
+            advertisements?.let { updateView(it) }
         })
     }
 
