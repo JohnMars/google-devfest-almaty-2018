@@ -13,4 +13,7 @@ interface RoomAdvertisementDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg advertisement: RoomAdvertisement)
+
+    @Query("SELECT * FROM advertisements WHERE id = :advertisementId LIMIT 1")
+    fun find(advertisementId: Long): RoomAdvertisement?
 }
