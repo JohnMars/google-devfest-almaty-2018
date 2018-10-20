@@ -3,6 +3,7 @@ package kz.kolesa.devfest.advertlist
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_advert_list.activity_advert_list_recycler_view
 import kz.kolesa.devfest.R
@@ -29,6 +30,9 @@ class AdvertListActivity : AppCompatActivity() {
         advertListViewModel = ViewModelProviders
                 .of(this)
                 .get(AdvertListViewModel::class.java)
+        advertListViewModel.getAdvertisements().observe(this, Observer { advertisements ->
+            TODO("Обновляем UI")
+        })
     }
 
     private fun updateView(advertisements: List<Advertisement>) {
