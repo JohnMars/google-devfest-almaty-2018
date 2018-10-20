@@ -32,8 +32,13 @@ class DefaultAdvertisementRepository(
             return emptyList() // TODO вытащить объявлении из AdvertisementDao
         }
 
+        val advertisementDao = kolesaDatabase.advertisementDao()
         val advertisementList = response.body()?.map {
-            apiAdvertisementMapper.map(it)
+            val advertisement = apiAdvertisementMapper.map(it)
+            val roomAdvertisement = advertToRoomMapper.map(advertisement)
+            advertisementDao.insertAll(roomAdvertisement)
+
+            advertisement
         }
 
         return advertisementList ?: emptyList() // TODO вытащить объявлении из AdvertisementDao
