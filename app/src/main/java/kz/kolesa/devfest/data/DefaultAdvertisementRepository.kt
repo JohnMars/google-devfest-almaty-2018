@@ -3,7 +3,10 @@ package kz.kolesa.devfest.data
 import android.util.Log
 import kz.kolesa.devfest.data.api.ADVERTISEMENT_SERVICE
 import kz.kolesa.devfest.data.api.AdvertisementService
+import kz.kolesa.devfest.data.mapper.AdvertisementToRoomMapper
 import kz.kolesa.devfest.data.mapper.ApiAdvertisementMapper
+import kz.kolesa.devfest.data.mapper.RoomToAdvertisementMapper
+import kz.kolesa.devfest.data.room.KolesaDatabase
 import kz.kolesa.devfest.domain.entity.Advertisement
 import kz.kolesa.devfest.domain.repository.AdvertisementRepository
 import java.io.IOException
@@ -14,7 +17,10 @@ val DEFAULT_ADVERTISEMENT_REPOSITORY: AdvertisementRepository by lazy {
 
 class DefaultAdvertisementRepository(
         private val advertisementService: AdvertisementService = ADVERTISEMENT_SERVICE,
-        private val apiAdvertisementMapper: ApiAdvertisementMapper = ApiAdvertisementMapper()
+        private val apiAdvertisementMapper: ApiAdvertisementMapper = ApiAdvertisementMapper(),
+        private val kolesaDatabase: KolesaDatabase = KolesaDatabase.get(),
+        private val advertToRoomMapper: AdvertisementToRoomMapper = AdvertisementToRoomMapper(),
+        private val roomToAdvertisementMapper: RoomToAdvertisementMapper = RoomToAdvertisementMapper()
 ) : AdvertisementRepository {
 
     override fun searchAdvertisement(): List<Advertisement> {
