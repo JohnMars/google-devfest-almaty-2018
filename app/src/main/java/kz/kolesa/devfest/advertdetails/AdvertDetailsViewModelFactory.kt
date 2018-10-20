@@ -1,5 +1,7 @@
 package kz.kolesa.devfest.advertdetails
 
-class AdvertDetailsViewModelFactory {
-    // TODO Добавить реализацию Factory чтобы создать AdvertDetailsViewModel
-}
+import androidx.lifecycle.ViewModelProvider
+
+class AdvertDetailsViewModelFactory(
+        private val advertisementId: Long
+) : ViewModelProvider.Factory
