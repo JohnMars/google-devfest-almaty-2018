@@ -16,6 +16,7 @@ import kz.kolesa.devfest.domain.entity.Advertisement
 class AdvertListActivity : AppCompatActivity() {
 
     private lateinit var advertListAdapter: AdvertListAdapter
+    private lateinit var advertListViewModel: AdvertListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,6 @@ class AdvertListActivity : AppCompatActivity() {
         activity_advert_list_recycler_view.apply {
             adapter = advertListAdapter
         }
-        TODO("Создание ViewModel")
     }
 
     private fun updateView(advertisements: List<Advertisement>) {
