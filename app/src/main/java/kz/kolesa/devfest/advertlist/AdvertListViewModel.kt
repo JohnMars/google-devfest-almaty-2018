@@ -15,5 +15,9 @@ class AdvertListViewModel(
 
     private val advertListLiveData = MutableLiveData<List<Advertisement>>()
 
-    fun getAdvertisements(): LiveData<List<Advertisement>> = advertListLiveData
+    fun getAdvertisements(): LiveData<List<Advertisement>> = advertListLiveData.apply {
+        if (value == null) {
+            TODO("Загрузка данных")
+        }
+    }
 }
