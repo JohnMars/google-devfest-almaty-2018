@@ -3,6 +3,7 @@ package kz.kolesa.devfest.advertlist
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_advert_list.activity_advert_list_recycler_view
 import kz.kolesa.devfest.R
 import kz.kolesa.devfest.advertdetails.ADVERT_ID_KEY
@@ -25,6 +26,9 @@ class AdvertListActivity : AppCompatActivity() {
         activity_advert_list_recycler_view.apply {
             adapter = advertListAdapter
         }
+        advertListViewModel = ViewModelProviders
+                .of(this)
+                .get(AdvertListViewModel::class.java)
     }
 
     private fun updateView(advertisements: List<Advertisement>) {
