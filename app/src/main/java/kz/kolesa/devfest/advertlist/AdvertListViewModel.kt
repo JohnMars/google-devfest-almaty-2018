@@ -31,7 +31,7 @@ class AdvertListViewModel(
                 val searchResponse = advertisementService.searchAdvertisements().execute()
                 searchResponse.body()?.map { apiAdvertisementMapper.map(it) }
             }
-            TODO("Уведомляем LiveData")
+            advertListLiveData.value = advertisements
         }
     }
 }
