@@ -29,7 +29,7 @@ class DefaultAdvertisementRepository(
         } catch (e: IOException) {
             Log.e("AdvertisementRepository", e.localizedMessage, e)
 
-            return emptyList() // TODO вытащить объявлении из AdvertisementDao
+            return getLocalAdvertisements()
         }
 
         val advertisementDao = kolesaDatabase.advertisementDao()
@@ -49,7 +49,9 @@ class DefaultAdvertisementRepository(
     }
 
     private fun getLocalAdvertisements(): List<Advertisement> {
-        TODO("Вытащить список из AdvertisementDao")
+        return kolesaDatabase.advertisementDao().getAll().map {
+            roomToAdvertisementMapper.map(it)
+        }
     }
 
     private fun requestAdvertisement(id: Long): Advertisement? {
