@@ -45,7 +45,10 @@ class DefaultAdvertisementRepository(
     }
 
     override fun getAdvertisement(id: Long): Advertisement? {
-        return requestAdvertisement(id) // TODO: Вытащить объявление из AdvertisementDao
+        val advertisementDao = kolesaDatabase.advertisementDao()
+        return advertisementDao.find(id)?.let {
+            roomToAdvertisementMapper.map(it)
+        }
     }
 
     private fun getLocalAdvertisements(): List<Advertisement> {
