@@ -7,14 +7,12 @@ import kotlinx.coroutines.experimental.DefaultDispatcher
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.withContext
-import kz.kolesa.devfest.data.api.ADVERTISEMENT_SERVICE
-import kz.kolesa.devfest.data.api.AdvertisementService
-import kz.kolesa.devfest.data.mapper.ApiAdvertisementMapper
+import kz.kolesa.devfest.data.DEFAULT_ADVERTISEMENT_REPOSITORY
 import kz.kolesa.devfest.domain.entity.Advertisement
+import kz.kolesa.devfest.domain.repository.AdvertisementRepository
 
 class AdvertListViewModel(
-        private val advertisementService: AdvertisementService = ADVERTISEMENT_SERVICE,
-        private val apiAdvertisementMapper: ApiAdvertisementMapper = ApiAdvertisementMapper()
+        private val advertisementRepository: AdvertisementRepository = DEFAULT_ADVERTISEMENT_REPOSITORY
 ) : ViewModel() {
 
     private val advertListLiveData = MutableLiveData<List<Advertisement>>()
@@ -28,8 +26,7 @@ class AdvertListViewModel(
     private fun requestAdvertisements() {
         launch(UI) {
             val advertisements = withContext(DefaultDispatcher) {
-                val searchResponse = advertisementService.searchAdvertisements().execute()
-                searchResponse.body()?.map { apiAdvertisementMapper.map(it) }
+                advertisementRepository.searchAdvertisement()
             }
             advertListLiveData.value = advertisements
         }
