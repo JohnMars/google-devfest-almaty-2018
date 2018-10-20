@@ -5,5 +5,8 @@ import androidx.room.RoomDatabase
 
 const val KOLESA_DATABASE_NAME = "kolesa"
 
-@Database()
+@Database(
+        entities = [RoomAdvertisement::class],
+        version = 1
+)
 abstract class KolesaDatabase : RoomDatabase()
