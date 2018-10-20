@@ -6,7 +6,10 @@ import java.util.*
 /**
  * Entity - сущность в БД. Можно указать название таблицы
  */
-@Entity(tableName = "advertisements")
+@Entity(
+        tableName = "advertisements",
+        primaryKeys = ["id"]
+)
 data class RoomAdvertisement(
         val id: Long,
         val title: String,
