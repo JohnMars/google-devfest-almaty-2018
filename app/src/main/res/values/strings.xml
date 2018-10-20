@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DevFest Code Labs</string>
+    <string name="activity_advert_details_price">%1$d тг</string>
+    <string name="layout_item_advert_price">%1$d тг</string>
+</resources>
