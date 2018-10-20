@@ -1,5 +1,6 @@
 package kz.kolesa.devfest.data.room
 
+import androidx.room.TypeConverter
 import java.util.*
 
 /**
@@ -8,9 +9,11 @@ import java.util.*
 @Suppress("unused")
 object DateConverter {
 
+    @TypeConverter
     @JvmStatic
     fun toDate(timestamp: Long?): Date? = timestamp?.let { Date(timestamp) }
 
+    @TypeConverter
     @JvmStatic
     fun toTimestamp(date: Date?): Long? = date?.time
 }
@@ -25,26 +28,31 @@ object AdvertisementConverter {
     private const val DELIMITER = ", "
     private const val LABEL_VALUE_DELIMITER = "="
 
+    @TypeConverter
     @JvmStatic
     fun toPhotoList(photoListRaw: String?): List<RoomPhoto>? {
         return photoListRaw?.split(DELIMITER)?.map { RoomPhoto(it) }
     }
 
+    @TypeConverter
     @JvmStatic
     fun toPhotoListRaw(photoList: List<RoomPhoto>?): String? {
         return photoList?.joinToString(separator = DELIMITER) { it.url }
     }
 
+    @TypeConverter
     @JvmStatic
     fun toPhoneList(phoneListRaw: String?): List<RoomPhone>? {
         return phoneListRaw?.split(DELIMITER)?.map { RoomPhone(it) }
     }
 
+    @TypeConverter
     @JvmStatic
     fun toPhoneListRaw(phoneList: List<RoomPhone>?): String? {
         return phoneList?.joinToString(separator = DELIMITER) { it.number }
     }
 
+    @TypeConverter
     @JvmStatic
     fun toParameterList(parameterListRaw: String?): List<RoomParameter>? {
         return parameterListRaw?.split(DELIMITER)?.map {
@@ -56,6 +64,7 @@ object AdvertisementConverter {
         }
     }
 
+    @TypeConverter
     @JvmStatic
     fun toParameterListRaw(parameterList: List<RoomParameter>?): String? {
         return parameterList?.joinToString(separator = DELIMITER) {
