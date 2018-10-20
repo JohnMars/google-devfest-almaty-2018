@@ -69,7 +69,9 @@ class AdvertDetailsActivity : AppCompatActivity() {
     }
 
     private fun observeLiveData() {
-        TODO("Реализовать подписку на LiveData")
+        advertDetailsViewModel.advertisementLiveData.observe(this, Observer { advertisement ->
+            advertisement?.let { onAdvertisementUpdated(it) }
+        })
     }
 
     private fun onNavigationEventReceived(event: Event<AdvertDetailsNavigation>) {
