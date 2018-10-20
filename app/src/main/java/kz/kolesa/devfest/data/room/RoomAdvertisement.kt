@@ -1,7 +1,12 @@
 package kz.kolesa.devfest.data.room
 
+import androidx.room.Entity
 import java.util.*
 
+/**
+ * Entity - сущность в БД. Можно указать название таблицы
+ */
+@Entity(tableName = "advertisements")
 data class RoomAdvertisement(
         val id: Long,
         val title: String,
