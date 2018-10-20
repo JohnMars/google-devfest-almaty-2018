@@ -10,7 +10,7 @@ import androidx.room.TypeConverters
         entities = [RoomAdvertisement::class],
         version = 1
 )
-@TypeConverters
+@TypeConverters(DateConverter::class, AdvertisementConverter::class)
 abstract class KolesaDatabase : RoomDatabase() {
 
     companion object {
