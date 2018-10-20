@@ -2,9 +2,8 @@ package kz.kolesa.devfest.data.room
 
 import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
-
-const val KOLESA_DATABASE_NAME = "kolesa"
 
 @Database(
         entities = [RoomAdvertisement::class],
@@ -24,7 +23,11 @@ abstract class KolesaDatabase : RoomDatabase() {
         }
 
         private fun create(context: Context): KolesaDatabase {
-            TODO("Создание instance KolesaDatabase")
+            return Room.databaseBuilder(
+                    context.applicationContext,
+                    KolesaDatabase::class.java,
+                    KOLESA_DATABASE_NAME
+            ).build()
         }
     }
 
