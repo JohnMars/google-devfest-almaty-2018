@@ -1,6 +1,5 @@
 package kz.kolesa.devfest.data.room
 
-import androidx.room.TypeConverter
 import java.util.*
 
 /**
@@ -9,11 +8,9 @@ import java.util.*
 @Suppress("unused")
 object DateConverter {
 
-    @TypeConverter
     @JvmStatic
     fun toDate(timestamp: Long?): Date? = timestamp?.let { Date(timestamp) }
 
-    @TypeConverter
     @JvmStatic
     fun toTimestamp(date: Date?): Long? = date?.time
 }
