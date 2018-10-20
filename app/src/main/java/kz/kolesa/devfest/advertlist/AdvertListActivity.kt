@@ -24,6 +24,7 @@ class AdvertListActivity : AppCompatActivity() {
         activity_advert_list_recycler_view.apply {
             adapter = advertListAdapter
         }
+        TODO("Создание ViewModel")
     }
 
     private fun updateView(advertisements: List<Advertisement>) {
