@@ -1,5 +1,9 @@
 package kz.kolesa.devfest.advertlist
 
-// TODO Добавить реализацию ViewModel
+import androidx.lifecycle.ViewModel
+import kz.kolesa.devfest.domain.entity.Advertisement
 
-class AdvertListViewModel
+class AdvertListViewModel: ViewModel() {
+
+    fun getAdvertisements(): List<Advertisement> = emptyList()
+}
