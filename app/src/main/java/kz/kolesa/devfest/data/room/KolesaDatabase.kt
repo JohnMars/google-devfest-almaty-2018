@@ -9,4 +9,7 @@ const val KOLESA_DATABASE_NAME = "kolesa"
         entities = [RoomAdvertisement::class],
         version = 1
 )
-abstract class KolesaDatabase : RoomDatabase()
+abstract class KolesaDatabase : RoomDatabase() {
+
+    abstract fun advertisementDao(): RoomAdvertisementDao
+}
