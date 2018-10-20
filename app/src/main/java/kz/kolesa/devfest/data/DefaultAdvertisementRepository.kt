@@ -41,14 +41,14 @@ class DefaultAdvertisementRepository(
             advertisement
         }
 
-        return advertisementList ?: emptyList() // TODO вытащить объявлении из AdvertisementDao
+        return advertisementList ?: getLocalAdvertisements()
     }
 
     override fun getAdvertisement(id: Long): Advertisement? {
         val advertisementDao = kolesaDatabase.advertisementDao()
         return advertisementDao.find(id)?.let {
             roomToAdvertisementMapper.map(it)
-        }
+        } ?: requestAdvertisement(id)
     }
 
     private fun getLocalAdvertisements(): List<Advertisement> {
@@ -58,8 +58,14 @@ class DefaultAdvertisementRepository(
     }
 
     private fun requestAdvertisement(id: Long): Advertisement? {
-        val response = advertisementService.getAdvertisement(id).execute()
+        val response = try {
+            advertisementService.getAdvertisement(id).execute()
+        } catch (e : IOException) {
+            Log.e("AdvertisementRepository", e.localizedMessage, e)
 
-        return response.body()?.let { apiAdvertisementMapper.map(it) }
+            return null
+        }
+
+        return response?.body()?.let { apiAdvertisementMapper.map(it) }
     }
 }
