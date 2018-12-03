@@ -9,19 +9,22 @@ import kotlinx.coroutines.experimental.withContext
 import kz.kolesa.devfest.data.DEFAULT_ADVERTISEMENT_REPOSITORY
 import kz.kolesa.devfest.domain.entity.Advertisement
 import kz.kolesa.devfest.domain.repository.AdvertisementRepository
+import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * ViewModel для экрана объявления
  */
 class AdvertDetailsViewModel(
         private val advertisementId: Long,
-        private val advertisementRepository: AdvertisementRepository = DEFAULT_ADVERTISEMENT_REPOSITORY
+        private val advertisementRepository: AdvertisementRepository = DEFAULT_ADVERTISEMENT_REPOSITORY,
+        private val uiContext: CoroutineContext = UI,
+        private val ioContext: CoroutineContext = DefaultDispatcher
 ): ViewModel() {
 
-    val advertisementLiveData = MutableLiveData<Advertisement>().apply {
-        if (value == null) {
-            requestAdvertisement(advertisementId)
-        }
+    val advertisementLiveData = MutableLiveData<Advertisement>()
+
+    init {
+        requestAdvertisement(advertisementId)
     }
 
     fun onCallClicked() {
@@ -29,8 +32,8 @@ class AdvertDetailsViewModel(
     }
 
     private fun requestAdvertisement(advertisementId: Long) {
-        launch(UI) {
-            val advertisement = withContext(DefaultDispatcher) {
+        launch(uiContext) {
+            val advertisement = withContext(ioContext) {
                 advertisementRepository.getAdvertisement(advertisementId)
             }
             advertisementLiveData.value = advertisement
